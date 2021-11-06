@@ -1,0 +1,70 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+        <h3>Essays</h3>
+        <hr>
+        <div>
+            <form >
+                {% csrf_token %}
+                <input type="text" name = 'keyword' class="input-sm">
+                <button type="submit" class="btn btn-info">Search</button>
+
+            </form>
+
+
+        </div>
+        
+        {% if articles %}
+
+            {% for article in  articles %}
+        
+            <div class="container mt-5">
+                <div class="row">
+                    <div class="col-lg-8">
+                        
+                        <!-- Post content-->
+                        <article>
+                            <!-- Post header-->
+                            <header class="mb-4">
+                                <!-- Post title-->  
+                                <a href="{%url 'article:detail' article.id %}"><h1 class="fw-bolder mb-1">{{article.title}}</h1></a>  
+
+                                <!-- Post meta content-->
+                                <div class="text-muted fst-italic mb-2">Posted on {{article.created_date}} by {{article.author}}</div>
+                                <!-- Post categories-->
+                               
+                            </header>
+                            <!-- Preview image figure-->
+                            {% if article.article_image %}
+                                <figure class="mb-4"><img class="img-fluid rounded" src="{{article.article_image.url}}" alt="..." /></figure>
+             
+                            {% endif %}
+                            <!-- Post content-->
+                            <section class="mb-5">
+                                <p>{{article.content | safe | truncatechars:40}}</p>
+                                <a href="{%url 'article:detail' article.id %}" class="btn btn-info" style="float: right;">To Continue</a>
+                            </section>
+                        </article>
+                        <!-- Comments section-->
+                        
+                    </div>
+                    <hr>
+                    <!-- Side widgets-->
+                    
+                        <!-- Categories widget-->
+                        
+                        <!-- Side widget-->
+                       
+                    </div>
+                </div>
+            </div>
+            <hr>
+            
+            {% endfor %}
+
+            
+        {% else %}
+            <div class="alert alert-danger">There is no such an essay in this page.</div>            
+        {% endif %}
+     
+{% endblock body %}

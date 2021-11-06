@@ -1,0 +1,24 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+    <div class="jumbotron text-center" >
+        <h3>Welcome To My Blog</h3>
+        <p>We are gonna learn Django in that course.</p>
+    </div>
+    <p>
+        {% if number1 == 7 %}
+            <p>1. Sayımız 7'ye eşit</p>
+
+        {% endif %}
+
+    </p>
+
+    <p>
+        {% if request.user.is_authenticated %}
+            Giriş yapılmış {{request.user.username}}
+        {% else %}
+            Giriş Yapılmamış
+        {% endif %}
+
+    </p>
+{% endblock body %}
